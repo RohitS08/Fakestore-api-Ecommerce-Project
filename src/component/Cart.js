@@ -1,9 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import "../App.css";
+import { useNavigate } from "react-router-dom";
 import { Footer } from "./Footer";
 import { remove } from "../store/cartSlice";
 import emptyCartImg from '../image/emptyCart.png';
 export function Cart({ Count, Total, setCount, setTotal }) {
+  const navigate = useNavigate();
     const dispatch = useDispatch();
     const { getCount, getTotal, products } = useSelector((state) => state.cart);
     console.log("thsi is data");
@@ -11,6 +13,9 @@ export function Cart({ Count, Total, setCount, setTotal }) {
     const handleRemove = (productId) => {
         dispatch(remove(productId));
     }
+    const {isAuthorized} = useSelector(state=>state.user);
+    const goToCheckout = () => navigate('/checkout');
+    const gotoLoginPage = () => navigate("/Login");
     return (
 
         <>
@@ -55,7 +60,12 @@ export function Cart({ Count, Total, setCount, setTotal }) {
                                     <div class="col"><strong>${Math.round(getTotal) + 5}</strong></div>
                                     <hr></hr>
                                 </div>
-                                <button style={{ width: "100%" }} className="btn btn-primary">Proceed to Checkout</button>
+                                {isAuthorized ? (
+                                <button style={{ width: "100%" }} className="btn btn-primary"
+                                onClick={()=>goToCheckout()}>Proceed to Checkout</button>
+                                ):(
+                                <button style={{ width: "100%" }} className="btn btn-danger" onClick={()=>gotoLoginPage()}>Login to Checkout</button>
+                                )}
                             </div>
                         </div>
 

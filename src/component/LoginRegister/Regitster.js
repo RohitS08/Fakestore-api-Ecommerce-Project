@@ -9,7 +9,7 @@ const Register = () => {
     const [fName, setfName] = useState("");
     const [lName, setlName] = useState("");
     const [email, setEmail] = useState("");
-    const [loading, setLoading] = useState(false);
+    // const [loading, setLoading] = useState(false);
   //  const [username, setUsername] = useState("");
     const [tel, setTel] = useState("");
     const [password, setPassword] = useState("");
@@ -19,36 +19,33 @@ const Register = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log({ email, tel, password });
-        // signupUser();
+         signupUser();
         
-    //    setUsername("");
-      //  setPassword("");
     };
     
-    // const signupUser = ()=>{
+     const signupUser = ()=>{
     // setLoading(true);
-    // axios.post(`/api/signup`,{
-    //   fName,
-    //   lName,
-    //   email,
-    //   'phone':tel,
-    //   'pwd':password
-    // }).then(res => {
-    //   if(res.status===200){
-    //     alert("Success");
-    //     setEmail("");
-    //     setfName("");
-    //     setlName("");
-    //     setTel("");
-    //     setPassword("");
+     axios.post(`/api/signup`,{
+       fName,
+       lName,
+       email,
+       'phone':tel,
+       'pwd':password
+     }).then(res => {
+       if(res.status===200){
+         alert("Success");
+         setEmail("");
+         setfName("");
+         setlName("");
+         setTel("");
+         setPassword("");
     //     setLoading(false);
-    //   }
-    // }).catch(err=>{
+       }
+     }).catch(err=>{
     //   setLoading(false);
-    //   alert(err.response.data.errMsg);
-    // })
-//   }
-    // const gotoLoginPage = () => navigate("/loginPage");
+       alert(err.response.data.errMsg);
+     })
+   }
 
     return (
         <div>
